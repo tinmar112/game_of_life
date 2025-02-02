@@ -1,0 +1,1 @@
+Welcome to Conway's Game of Life game!

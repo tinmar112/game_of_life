@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "game-of-life"
+version = "0.1.0"
+description = ""
+authors = ["Martin Zadora <martin.zadora@etu.minesparis.psl.eu>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pygame = "^2.6.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+game = "game_of_life.main:main"
