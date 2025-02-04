@@ -1,6 +1,6 @@
 import pygame
 
-from game_of_life.game_object import GameObject
+from game_of_life.cell import Cell
 
 class Game:
 
@@ -11,19 +11,19 @@ class Game:
         self._tile_size = tile_size
         self._window_width = window_width
         self._window_height = window_height
-        self._objects: list[GameObject] = []
+        self._cells: list[Cell] = []
     
     @property
-    def objects(self) -> list[GameObject]:
-        return(self._objects)
+    def cells(self) -> list[Cell]:
+        return(self._cells)
     
-    @objects.setter
-    def objects(self, new_objects_list: list[GameObject]) -> None:
-        self._objects = new_objects_list
+    @cells.setter
+    def cells(self, new_cells_list: list[Cell]) -> None:
+        self._cells = new_cells_list
     
     def draw(self,screen: pygame.Surface) -> None:
-        for obj in self._objects:
-            obj.draw(screen)
+        for cell in self._cells:
+            cell.draw(screen)
     
-    def add_object(self,new_object: GameObject) -> None:
-        self._objects.append(new_object)   
+    def add_cell(self,new_cell: Cell) -> None:
+        self._cells.append(new_cell)   

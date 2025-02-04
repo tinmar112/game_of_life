@@ -1,55 +1,39 @@
-import copy
 import pygame
 
-from game_of_life.board import Board
+from game_of_life.arguments import arguments
 from game_of_life.cell import Cell
+from game_of_life.cell_init import cell_init
 from game_of_life.game import Game
-from game_of_life.game import GameObject
-from game_of_life.state import State
+from game_of_life.read_write import read_pattern
 
 def main() -> None:
+
+    args = arguments()
 
     pygame.init()
 
     clock = pygame.time.Clock()
 
-    screen = pygame.display.set_mode((20*40,20*20))
-    game = Game(20,40,20)
-    board = Board(game,(255,255,255))
-    game.add_object(board)
-    board.cell_init(game)
-
-    for elt in game.objects:
-        if isinstance(elt,Cell):
-            if (elt._loc_x == 3 and elt._loc_y == 3):
-                elt._state = State.LIVE
-            elif (elt._loc_x == 4 and elt._loc_y == 3):
-                elt._state = State.LIVE
-            elif (elt._loc_x == 5 and elt._loc_y == 3):
-                elt._state = State.LIVE
-            elif (elt._loc_x == 5 and elt._loc_y == 2):
-                elt._state = State.LIVE
-            elif (elt._loc_x == 4 and elt._loc_y == 1):
-                elt._state = State.LIVE
-
-    game.draw(screen)
+    screen = pygame.display.set_mode((20*args.width,20*args.height))
+    game = Game(20,args.width,args.height)
+    initial_live_cells = read_pattern(args.initial_file)
+    cell_init(game,initial_live_cells)
 
     running = True
 
     while running:
 
-        clock.tick(5)
-
-        # Finding neighbours and transitioning for cells.
-        new_objects: list[GameObject] = [board]
-        for cell in game.objects:
-            if isinstance(cell,Cell):
-                cell.find_neighbours(game.objects)
-                next_state = cell.transition()           
-                new_objects.append(Cell(game,cell._loc_x,cell._loc_y,next_state))
-        game.objects = new_objects
+        clock.tick(args.fps)
 
         game.draw(screen)
         pygame.display.update()
+
+        # Finding neighbours and transitioning for cells.
+        new_objects: list[Cell] = []
+        for cell in game.cells:
+            cell.find_neighbours(game.cells)
+            next_state = cell.transition()           
+            new_objects.append(Cell(game._tile_size,cell._loc_x,cell._loc_y,next_state))
+        game.cells = new_objects
     
     pygame.quit()
