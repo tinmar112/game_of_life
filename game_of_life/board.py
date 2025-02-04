@@ -1,15 +1,17 @@
 import pygame
 
+from game_of_life.cell import Cell
 from game_of_life.game import Game
+from game_of_life.game_object import GameObject
+from game_of_life.state import State
 
-class Board(Game):
+class Board(GameObject):
 
-    def __init__(self, 
-                 tile_size: int, 
-                 window_width: int, 
-                 window_height: int, 
-                 colour : tuple[int,int,int]) -> None:
-        Game.__init__(self, tile_size, window_width, window_height)
+    def __init__(self, game: Game, colour: tuple[int,int,int]) -> None:
+        GameObject.__init__(self)
+        self._tile_size = game._tile_size
+        self._window_height = game._window_height
+        self._window_width = game._window_width
         self._colour = colour
 
     def draw(self,screen: pygame.Surface) -> None:
@@ -17,3 +19,9 @@ class Board(Game):
                                 self._window_width * self._tile_size,
                                 self._window_height * self._tile_size)
         pygame.draw.rect(screen, self._colour, rectangle)
+
+    def cell_init(self, game: Game):
+        for i in range (self._window_width):
+            for j in range(self._window_height):
+                cell = Cell(game,i,j, State.DEAD)
+                game.add_object(cell)
