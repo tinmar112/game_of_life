@@ -1,6 +1,7 @@
 import pygame
 
 from game_of_life.cell import Cell
+from game_of_life.state import State
 
 class Game:
 
@@ -20,6 +21,14 @@ class Game:
     @cells.setter
     def cells(self, new_cells_list: list[Cell]) -> None:
         self._cells = new_cells_list
+    
+    @property
+    def live_cells(self) -> list[tuple[int,int]]:
+        live_cells: list[tuple[int,int]] = []
+        for cell in self._cells:
+            if cell._state == State.LIVE:
+                live_cells.append((cell._loc_x,cell._loc_y))
+        return live_cells
     
     def draw(self,screen: pygame.Surface) -> None:
         for cell in self._cells:

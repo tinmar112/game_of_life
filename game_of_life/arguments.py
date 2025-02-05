@@ -3,12 +3,12 @@ import argparse
 def arguments() -> argparse.Namespace:
 
     DEFAULT_INITIAL_FILE = "patterns/glider.txt"
-    DEFAULT_OUTPUT_FILE = 'output.txt'
+    DEFAULT_OUTPUT_FILE = "patterns/output.txt"
     DEFAULT_STEPS = 20
     DEFAULT_DISPLAY = True
     DEFAULT_FPS = 10
     DEFAULT_WIDTH = 40
-    DEFAULT_HEIGHT = 20
+    DEFAULT_HEIGHT = 30
 
     parser = argparse.ArgumentParser(description = "Game of Life.",
                                      formatter_class = 
