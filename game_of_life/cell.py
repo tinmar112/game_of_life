@@ -14,6 +14,18 @@ class Cell:
         self._state = state
         self._neighbours: list[Cell] = []
     
+    @property
+    def loc_x(self) -> int:
+        return(self._loc_x)
+    
+    @property
+    def loc_y(self) -> int:
+        return(self._loc_y)
+    
+    @property
+    def state(self) -> State:
+        return(self._state)
+
     def draw(self, screen: pygame.Surface) -> None:
         """Draws the cell, dead of alive."""
         size = self._tile_size
@@ -35,26 +47,26 @@ class Cell:
 
         for other_cell in list_of_cells:
 
-            if other_cell._loc_x == self._loc_x - 1:
-                if other_cell._loc_y == self._loc_y - 1:
+            if other_cell.loc_x == self._loc_x - 1:
+                if other_cell.loc_y == self._loc_y - 1:
                     self._neighbours.append(other_cell)
-                elif other_cell._loc_y == self._loc_y:                        
+                elif other_cell.loc_y == self._loc_y:                        
                     self._neighbours.append(other_cell)
-                elif other_cell._loc_y == self._loc_y + 1:
-                    self._neighbours.append(other_cell)
-                    
-            elif other_cell._loc_x == self._loc_x:
-                if other_cell._loc_y == self._loc_y - 1:
-                    self._neighbours.append(other_cell)
-                elif other_cell._loc_y == self._loc_y + 1:
+                elif other_cell.loc_y == self._loc_y + 1:
                     self._neighbours.append(other_cell)
                     
-            elif other_cell._loc_x == self._loc_x + 1:
-                if other_cell._loc_y == self._loc_y - 1:
+            elif other_cell.loc_x == self._loc_x:
+                if other_cell.loc_y == self._loc_y - 1:
                     self._neighbours.append(other_cell)
-                elif other_cell._loc_y == self._loc_y:
+                elif other_cell.loc_y == self._loc_y + 1:
                     self._neighbours.append(other_cell)
-                elif other_cell._loc_y == self._loc_y + 1:
+                    
+            elif other_cell.loc_x == self._loc_x + 1:
+                if other_cell.loc_y == self._loc_y - 1:
+                    self._neighbours.append(other_cell)
+                elif other_cell.loc_y == self._loc_y:
+                    self._neighbours.append(other_cell)
+                elif other_cell.loc_y == self._loc_y + 1:
                     self._neighbours.append(other_cell)
 
     def transition(self) -> State:
@@ -63,7 +75,7 @@ class Cell:
         # Step 1: counts the number of live neighbouring cells.
         alive = 0
         for cell in self._neighbours:
-            if cell._state == State.LIVE:
+            if cell.state == State.LIVE:
                 alive = alive + 1
 
         # Applies the transition mechanism, given a cell's current state.

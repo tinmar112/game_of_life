@@ -5,7 +5,6 @@ def arguments() -> argparse.Namespace:
     DEFAULT_INITIAL_FILE = "game_of_life/patterns/glider.txt"
     DEFAULT_OUTPUT_FILE = "game_of_life/patterns/output.txt"
     DEFAULT_STEPS = 20
-    DEFAULT_DISPLAY = True
     DEFAULT_FPS = 10
     DEFAULT_WIDTH = 40
     DEFAULT_HEIGHT = 30
@@ -26,8 +25,8 @@ def arguments() -> argparse.Namespace:
                         default=DEFAULT_STEPS,
                         help="Maximum number of steps to run.")
     
-    parser.add_argument("--display","-d",type=bool,
-                        default=DEFAULT_DISPLAY,
+    parser.add_argument("--display","-d",
+                        action="store_true",
                         help="Sets whether display should be on.")
     
     parser.add_argument("--fps","-f",type=int,
@@ -43,4 +42,5 @@ def arguments() -> argparse.Namespace:
                         help="Height of display window.")
 
     args = parser.parse_args()
+    
     return(args)
