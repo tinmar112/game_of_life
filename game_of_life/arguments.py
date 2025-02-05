@@ -2,8 +2,8 @@ import argparse
 
 def arguments() -> argparse.Namespace:
 
-    DEFAULT_INITIAL_FILE = "patterns/glider.txt"
-    DEFAULT_OUTPUT_FILE = "patterns/output.txt"
+    DEFAULT_INITIAL_FILE = "game_of_life/patterns/glider.txt"
+    DEFAULT_OUTPUT_FILE = "game_of_life/patterns/output.txt"
     DEFAULT_STEPS = 20
     DEFAULT_DISPLAY = True
     DEFAULT_FPS = 10
