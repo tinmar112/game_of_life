@@ -1,6 +1,7 @@
 import argparse
 
 def arguments() -> argparse.Namespace:
+    """Parses command line arguments."""
 
     DEFAULT_INITIAL_FILE = "game_of_life/patterns/glider.txt"
     DEFAULT_OUTPUT_FILE = "game_of_life/patterns/output.txt"
@@ -42,6 +43,9 @@ def arguments() -> argparse.Namespace:
     parser.add_argument("--height","-H",type=int,
                         default=DEFAULT_HEIGHT,
                         help=f"Height of display window, between {MIN_H} an {MAX_H}")
+    
+    parser.add_argument("--verbose", "-v", dest="verbose", action="count", default=0,
+                        help="Verbose level. -v for information, -vv for debug.")
 
     args = parser.parse_args()
 

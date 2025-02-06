@@ -3,7 +3,9 @@ from game_of_life.game import Game
 from game_of_life.state import State
 
 def cell_init(game: Game, live_cells: list[tuple[int,int]]) -> None:
-    # Increments start at -5 to give the board a buffer zone,
+    """Initialises the board of cells, given a list of initially living cells."""
+
+    # Increments start at (-5) to give the board a buffer zone,
     # in case patterns evolve outside of the pygame display.
     for i in range (-5, game.window_width):
         for j in range(-5, game.window_height):
