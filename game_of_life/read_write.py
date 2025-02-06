@@ -1,4 +1,5 @@
 def read_pattern(path: str) -> list[tuple[int,int]]:
+    """Translates a text file into a game state."""
     list = []
     with open(path, "r") as file:
         lines = file.readlines()
@@ -11,6 +12,7 @@ def read_pattern(path: str) -> list[tuple[int,int]]:
     return list
 
 def write_pattern(path: str, pattern: list[tuple[int, int]]) -> None:
+    """Encodes a final game state into a text file."""
     x_min = min([coord[0] for coord in pattern])
     x_max = max([coord[0] for coord in pattern]) 
     y_min = min([coord[1] for coord in pattern])

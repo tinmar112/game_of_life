@@ -3,6 +3,7 @@ import pygame
 from game_of_life.state import State
 
 class Cell:
+    """A cell: foundational element of the game"""
 
     def __init__(self,
                  tile_size: int,
@@ -16,14 +17,17 @@ class Cell:
     
     @property
     def loc_x(self) -> int:
+        """Returns the cell's x coordinate."""
         return(self._loc_x)
     
     @property
     def loc_y(self) -> int:
+        """Returns the cell's y coordinate."""
         return(self._loc_y)
     
     @property
     def state(self) -> State:
+        """Returns the cell's state."""
         return(self._state)
 
     def draw(self, screen: pygame.Surface) -> None:
@@ -70,7 +74,7 @@ class Cell:
                     self._neighbours.append(other_cell)
 
     def transition(self) -> State:
-        """Applies the transition mechanism."""
+        """Applies the transition mechanism to this cell."""
 
         # Step 1: counts the number of live neighbouring cells.
         alive = 0
